@@ -1,0 +1,71 @@
+
+{{!-- {{#each task}} --}}
+<form method="post" action="/update/{{task.id}}">
+  <div class="form-group">
+    <label for="user_id">User ID</label>
+    <input
+      type="number"
+      value="{{task.id}}"
+      id="user_id"
+      name="user_id"
+      class="form-control"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="category">Category</label>
+    <input
+      type="text"
+      id="category"
+      name="category"
+      class="form-control"
+      value="{{task.category}}"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input
+      type="number"
+      value="{{task.amount}}"
+      step="0.01"
+      id="amount"
+      name="amount"
+      class="form-control"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      value="{{task.description}}"
+      name="description"
+      rows="4"
+      class="form-control"
+      required
+    ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="expense_date">Date</label>
+    <input
+      type="date"
+      value="{{task.expense_date}}"
+      id="expense_date"
+      name="expense_date"
+      class="form-control"
+      required
+    />
+  </div>
+
+ <div>
+      <button type="submit" class="btn btn-success btn-sm">Update</button>
+      <a href="/" class="btn btn-warning btn-sm">< Home</a>
+ </div>
+</form>
+
+{{!-- {{/each}} --}}
