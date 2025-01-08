@@ -62,6 +62,36 @@ app.get("/user/:id", (req, res) => {
 });
 
 
+app.get('/user-expenses/total/:userId', (req, res) => {
+  const userId = req.params.userId;
+
+  const query = `
+    SELECT 
+      u.id AS user_id, 
+      u.name, 
+      SUM(e.amount) AS total_expense
+    FROM 
+      expense_tracker.users u
+    JOIN 
+      expenses.user_expenses e ON u.id = e.user_id
+    WHERE 
+      u.id = ?
+    GROUP BY 
+      u.id, u.name;
+  `;
+
+  db.query(query, [userId], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Error fetching expenses' });
+    } else {
+      // res.json(result.length ? result[0] : { message: 'No expenses found for this user.' });
+      res.render("totalExpense", { task: result[0] });
+
+    }
+  });
+});
+
 // Add a new task
 app.post("/add-expense", (req, res) => {
   const { user_id, category, amount, description, expense_date } = req.body;
